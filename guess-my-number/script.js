@@ -1,38 +1,58 @@
 'use strict';
 const $ = document;
-const numberQuery = $.querySelector('.number').textContent = 10
+const bodyElem = $.querySelector('body')
+const messageElem = $.querySelector('.message')
+const scoreElem = $.querySelector('.score')
+const inputElem = $.querySelector('.guess')
+const highscoreElem = $.querySelector('.highscore')
+const qnumberElem = $.querySelector('.number')
+let numberQuery = Math.floor((Math.random() * 20) + 1)
+qnumberElem.textContent = numberQuery
+function lost () {
+    messageElem.textContent = '😢game over'
+    scoreElem.textContent = 0
+    bodyElem.style.backgroundColor = 'red'
+    qnumberElem.textContent = numberQuery
+    inputElem.disabled = true
+}
+function win () {
+    messageElem.textContent = '🤩You Win'
+    bodyElem.style.backgroundColor = 'green'
+    qnumberElem.textContent = numberQuery
+    inputElem.disabled = true
+    if (Number(highscoreElem.textContent) >= Number(scoreElem.textContent) ) {
+        highscoreElem.textContent = highscoreElem.textContent
+    } else {
+        highscoreElem.textContent = scoreElem.textContent
+    }
+}
 $.querySelector('.check').addEventListener('click', function () {
-    const guess = Number($.querySelector('.guess').value)
+    const guess = Number(inputElem.value)
+    scoreElem.textContent  = Number(scoreElem.textContent) - 1
     if (!guess || guess < 0 || guess > 20) {
-        $.querySelector('.message').textContent =
+        messageElem.textContent =
         'please insert number between 1 and 20'
-        let ss = Number($.querySelector('.score').textContent) - 1
-        $.querySelector('.score').textContent = ss
-    } else if (Number($.querySelector('.score').textContent) <= 1) {
-        $.querySelector('.message').textContent = '😢game over'
-        $.querySelector('.score').textContent = 0
-        $.querySelector('body').style.backgroundColor = 'red'
-    } else if (guess === numberQuery) {
-        $.querySelector('.message').textContent = '🤩You Win'
-        $.querySelector('body').style.backgroundColor = 'green'
-        if (Number($.querySelector('.highscore').textContent) >= Number($.querySelector('.score').textContent) ) {
-            $.querySelector('.highscore').textContent = $.querySelector('.highscore').textContent
-        } else {
-            $.querySelector('.highscore').textContent = $.querySelector('.score').textContent
+        if (scoreElem.textContent <= 0) {
+            lost()
         }
+    } else if (Number(scoreElem.textContent) <= 0) {
+        lost()
+    } else if (guess === numberQuery) {
+        win()
     } else {
         if (guess > numberQuery) {
-            $.querySelector('.message').textContent ='⬆️too high'
+            messageElem.textContent ='⬆️too high'
         } else if (guess < numberQuery) {
-            $.querySelector('.message').textContent ='⬇️too low'
+            messageElem.textContent ='⬇️too low'
         }
-        let ss = Number($.querySelector('.score').textContent) - 1
-        $.querySelector('.score').textContent = ss
     }
 })
 $.querySelector('.again').addEventListener('click', function () {
-    $.querySelector('.score').textContent = '20'
-    $.querySelector('.guess').value = null
-    $.querySelector('body').style.backgroundColor = '#222'
-
+    messageElem.textContent = 'Start guessing...'
+    inputElem.disabled = false
+    scoreElem.textContent = '20'
+    inputElem.value = null
+    bodyElem.style.backgroundColor = '#222'
+    numberQuery = Math.floor((Math.random() * 20) + 1)
+    qnumberElem.textContent = numberQuery
 })
