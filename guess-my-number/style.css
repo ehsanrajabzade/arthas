@@ -13,8 +13,7 @@ html {
 body {
   font-family: 'Molisa Delawere', sans-serif;
   color: #eee;
-  background-color: #222;
-  /* background-color: #60b347; */
+  background: linear-gradient(90deg, rgba(59,202,210,1) 0%, rgba(241,166,232,1) 100%);  /* background-color: #60b347; */
 }
 
 /* LAYOUT */
@@ -220,7 +219,7 @@ content: '';
 
 /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
 #sky {
-  background:url(ggg.png) repeat-X;
+  background:url(https://i.imgur.com/PhHVjgw.png) repeat-X;
   animation: movebg 9s linear infinite;
 }
 
@@ -249,7 +248,7 @@ content: '';
   animation:gbwalk 1s steps(6) infinite;
   margin:auto;
   position:relative;
-  top:-20px;
+  top:34px;
   /* Ojo, muy costoso en rendimiento */
   /* filter:drop-shadow(5px 5px 5px #000); */
 }

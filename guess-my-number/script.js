@@ -6,18 +6,21 @@ const scoreElem = $.querySelector('.score')
 const inputElem = $.querySelector('.guess')
 const highscoreElem = $.querySelector('.highscore')
 const qnumberElem = $.querySelector('.number')
+const giphy = $.querySelector('.giphy')
 let numberQuery = Math.floor((Math.random() * 20) + 1)
-qnumberElem.textContent = numberQuery
+qnumberElem.textContent = '?'
 function lost () {
     messageElem.textContent = '😢game over'
     scoreElem.textContent = 0
-    bodyElem.style.backgroundColor = 'red'
+    bodyElem.style.background = 'red'
+    giphy.setAttribute('src', 'loser.gif')
     qnumberElem.textContent = numberQuery
     inputElem.disabled = true
 }
 function win () {
     messageElem.textContent = '🤩You Win'
-    bodyElem.style.backgroundColor = 'green'
+    bodyElem.style.background = 'green'
+    giphy.setAttribute('src', 'win.gif')
     qnumberElem.textContent = numberQuery
     inputElem.disabled = true
     if (Number(highscoreElem.textContent) >= Number(scoreElem.textContent) ) {
@@ -52,7 +55,8 @@ $.querySelector('.again').addEventListener('click', function () {
     inputElem.disabled = false
     scoreElem.textContent = '20'
     inputElem.value = null
-    bodyElem.style.backgroundColor = '#222'
+    bodyElem.style.background = "linear-gradient(90deg, rgba(59,202,210,1) 0%, rgba(241,166,232,1) 100%)"
     numberQuery = Math.floor((Math.random() * 20) + 1)
-    qnumberElem.textContent = numberQuery
+    qnumberElem.textContent = '?'
+    giphy.setAttribute('src', 'playing.gif')
 })
